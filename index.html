@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essências e Afins | Catálogo</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons para ícones modernos -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Configuração de Cores Customizadas no Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nude: {
+                            100: '#F9F6F0',
+                            200: '#F3EBE1',
+                            300: '#E5D3C8',
+                        },
+                        sage: {
+                            light: '#A3B19B',
+                            DEFAULT: '#849F76',
+                            dark: '#5C7351',
+                        },
+                        gold: {
+                            light: '#E6D39A',
+                            DEFAULT: '#C5A059',
+                            dark: '#9A7B3E',
+                        }
+                    },
+                    fontFamily: {
+                        playfair: ['"Playfair Display"', 'serif'],
+                        montserrat: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos e animações extras */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333333;
+        }
+        h1, h2, h3, h4, h5, h6, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Efeito de sobreposição em imagens */
+        .img-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+        .img-overlay img {
+            transition: transform 0.5s ease;
+        }
+        .img-overlay:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Botão WhatsApp Fixo */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 640px) {
+            #contato {
+                padding-bottom: 6rem;
+            }
+
+            .whatsapp-float {
+                width: 52px;
+                height: 52px;
+                right: 20px;
+                bottom: 20px;
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-nude-100 text-gray-800 antialiased selection:bg-sage selection:text-white">
+
+    <!-- Navegação -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#inicio" class="inline-flex items-center gap-2 font-playfair text-2xl md:text-3xl font-bold text-sage-dark tracking-wide" aria-label="Essências e Afins - início">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sage-dark">
+                            <img src="marca-flor.png" alt="" class="h-8 w-9 object-contain">
+                        </span>
+                        Essências <span class="text-gold italic font-normal">& Afins</span>
+                    </a>
+                </div>
+                
+                <!-- Menu Desktop -->
+                <div class="hidden md:flex space-x-5 items-center">
+                    <a href="#inicio" class="text-sm font-medium text-gray-600 hover:text-sage transition-colors">Início</a>
+                    <a href="#sobre" class="text-sm font-medium text-gray-600 hover:text-sage transition-colors">Sobre Nós</a>
+                    <a href="#categorias" class="text-sm font-medium text-gray-600 hover:text-sage transition-colors">Catálogo</a>
+                    <a href="#perfumes" class="text-sm font-medium text-gray-600 hover:text-sage transition-colors">Perfumes</a>
+                    <a href="#agua-lencois" class="text-sm font-medium text-gray-600 hover:text-sage transition-colors">Água de Lençóis</a>
+                    <a href="#contato" class="px-5 py-2.5 rounded-full bg-sage text-white text-sm font-medium hover:bg-sage-dark transition-colors shadow-md">Contato</a>
+                </div>
+
+                <!-- Menu Mobile Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-sage focus:outline-none" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-nude-200">
+            <div class="px-4 pt-2 pb-6 space-y-1 shadow-lg">
+                <a href="#inicio" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-sage hover:bg-nude-100">Início</a>
+                <a href="#sobre" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-sage hover:bg-nude-100">Sobre Nós</a>
+                <a href="#categorias" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-sage hover:bg-nude-100">Catálogo</a>
+                <a href="#perfumes" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-sage hover:bg-nude-100">Perfumes</a>
+                <a href="#agua-lencois" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-sage hover:bg-nude-100">Água de Lençóis</a>
+                <a href="#contato" class="block px-3 py-3 mt-2 text-center rounded-md text-base font-medium bg-sage text-white hover:bg-sage-dark">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-28 pb-20 md:pt-32 md:pb-24 flex items-center min-h-[90vh] justify-center overflow-hidden bg-gradient-to-br from-sage-dark via-[#526849] to-sage">
+        <div class="absolute -top-32 -right-24 h-96 w-96 rounded-full border border-gold-light/20" aria-hidden="true"></div>
+        <div class="absolute -bottom-48 -left-24 h-[30rem] w-[30rem] rounded-full border border-white/10" aria-hidden="true"></div>
+        <i class="ph-light ph-flower-lotus absolute right-[12%] top-1/4 text-[14rem] text-white/[0.04]" aria-hidden="true"></i>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <span class="block text-gold-light uppercase tracking-[0.3em] text-sm font-semibold mb-4">Artesanal &amp; Exclusivo</span>
+            <h1 class="font-playfair text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                Essências da Natureza <br> <span class="italic text-gold-light font-normal">para a sua Vida</span>
+            </h1>
+            <p class="text-white/90 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto">
+                Encontre fragrâncias inspiradas na natureza e em grandes clássicos da perfumaria para perfumar sua casa e acompanhar você.
+            </p>
+            <div class="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3" aria-label="Explore nossos catálogos">
+                <a href="#perfumes" class="group flex min-h-16 items-center justify-center gap-3 rounded-full border border-white/70 bg-white/10 px-6 py-4 text-base font-semibold text-white shadow-lg backdrop-blur-sm transition-all hover:-translate-y-1 hover:bg-white hover:text-sage-dark">
+                    <i class="ph ph-sparkle text-xl text-gold-light group-hover:text-gold-dark" aria-hidden="true"></i>
+                    <span>Perfumes</span>
+                    <i class="ph ph-arrow-down-right text-lg opacity-70" aria-hidden="true"></i>
+                </a>
+                <a href="#sobre" class="group flex min-h-16 items-center justify-center gap-3 rounded-full border border-white/70 bg-white/10 px-6 py-4 text-base font-semibold text-white shadow-lg backdrop-blur-sm transition-all hover:-translate-y-1 hover:bg-white hover:text-sage-dark">
+                    <i class="ph ph-flower-lotus text-xl text-gold-light group-hover:text-gold-dark" aria-hidden="true"></i>
+                    <span>Nossa História</span>
+                    <i class="ph ph-arrow-down-right text-lg opacity-70" aria-hidden="true"></i>
+                </a>
+                <a href="#agua-lencois" class="group flex min-h-16 items-center justify-center gap-3 rounded-full border border-white/70 bg-white/10 px-6 py-4 text-base font-semibold text-white shadow-lg backdrop-blur-sm transition-all hover:-translate-y-1 hover:bg-white hover:text-sage-dark">
+                    <i class="ph ph-drop text-xl text-gold-light group-hover:text-gold-dark" aria-hidden="true"></i>
+                    <span>Água de Lençóis</span>
+                    <i class="ph ph-arrow-down-right text-lg opacity-70" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <section id="sobre" class="py-24 bg-nude-100">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <i class="ph-light ph-leaf text-5xl text-sage mb-6 inline-block"></i>
+            <h2 class="font-playfair text-4xl text-sage-dark font-bold mb-8">Nossa História</h2>
+            <div class="relative">
+                <i class="ph-fill ph-quotes text-6xl text-gold/20 absolute -top-6 -left-6 md:-left-12"></i>
+                <p class="text-lg md:text-xl leading-relaxed text-gray-700 font-light relative z-10">
+                    Desde 2018, trabalhamos em parceria com um laboratório químico em São Paulo para criar fragrâncias inspiradas em perfumes importados e nos aromas da natureza, deixando sua casa e seu dia a dia ainda mais agradáveis.
+                </p>
+                <i class="ph-fill ph-quotes text-6xl text-gold/20 absolute -bottom-6 -right-6 md:-right-12 rotate-180"></i>
+            </div>
+            <div class="mt-12 w-24 h-1 bg-gold mx-auto rounded-full"></div>
+        </div>
+    </section>
+
+    <!-- Catálogo de Perfumes e Água de Lençóis -->
+    <section id="categorias" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-playfair text-4xl md:text-5xl text-sage-dark font-bold mb-4">Nosso Catálogo</h2>
+                <p class="text-gray-500 font-light">Conheça nossos produtos artesanais e encontre fragrâncias para você e para sua casa.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card Perfumes -->
+                <div class="bg-nude-100 rounded-2xl overflow-hidden card-hover border border-nude-200">
+                    <div class="h-64 img-overlay">
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800&auto=format&fit=crop" alt="Perfumes" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="font-playfair text-2xl text-sage-dark font-semibold mb-3">Perfumes</h3>
+                        <p class="text-sm text-gray-600 mb-6 min-h-[60px]">Perfumes femininos, masculinos e árabes, com opções para diferentes gostos.</p>
+                        <div class="space-y-2">
+                            <p class="text-gold-dark font-semibold">Tradicionais: <span class="text-gray-800 font-normal">A partir de R$ 179,99 (100ml)</span></p>
+                            <p class="text-gold-dark font-semibold">Árabes: <span class="text-gray-800 font-normal">A partir de R$ 199,90</span></p>
+                        </div>
+                        <a href="#perfumes" class="inline-flex items-center gap-1 mt-5 text-sm font-semibold text-sage-dark hover:text-gold-dark transition-colors">
+                            Ver todas as fragrâncias <i class="ph ph-arrow-down-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card Água de Lençóis -->
+                <div class="bg-nude-100 rounded-2xl overflow-hidden card-hover border border-nude-200">
+                    <div class="h-64 img-overlay">
+                        <img src="agua%20de%20len%C3%A7ois.jpg" alt="Frascos de Água de Lençóis em diferentes fragrâncias" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="font-playfair text-2xl text-sage-dark font-semibold mb-3">Água de Lençóis</h3>
+                        <p class="text-sm text-gray-600 mb-6 min-h-[60px]">Prolongue a sensação de limpeza e conforto nas suas roupas de cama. Escolha entre 12 fragrâncias disponíveis.</p>
+                        <div class="space-y-2">
+                            <p class="text-gold-dark font-semibold">Frasco 250ml: <span class="text-gray-800 font-normal">R$ 47,99</span></p>
+                        </div>
+                        <a href="#agua-lencois" class="inline-flex items-center gap-1 mt-5 text-sm font-semibold text-sage-dark hover:text-gold-dark transition-colors">
+                            Ver todas as fragrâncias <i class="ph ph-arrow-down-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Essências de Água de Lençóis -->
+    <section id="agua-lencois" class="py-20 bg-white scroll-mt-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-gold-dark font-medium tracking-widest uppercase text-xs">Perfume sua casa</span>
+                <h2 class="font-playfair text-4xl md:text-5xl text-sage-dark font-bold mt-2 mb-4">Essências de Água de Lençóis</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto font-light">Escolha sua fragrância favorita para deixar roupas de cama e ambientes ainda mais agradáveis.</p>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Tenue</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Flor de Figo</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Lavanda Inglesa</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Lemon Verbena</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Mamãe Bebê</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Sementes do Brasil</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Pistache</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Baunilha</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Rosas e Gardênia</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Bamboo MMartan</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Mel</div>
+                <div class="bg-nude-100 rounded-xl border border-nude-200 p-5 text-center text-sage-dark font-medium">Alecrim Lelis Blanc</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo de perfumes -->
+    <section id="perfumes" class="py-24 bg-nude-100 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-gold-dark font-medium tracking-widest uppercase text-xs">Encontre sua essência</span>
+                <h2 class="font-playfair text-4xl md:text-5xl text-sage-dark font-bold mt-2 mb-4">Perfumes</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto font-light">Explore nossa seleção de fragrâncias femininas, masculinas e árabes.</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto mb-8">
+                <label for="perfume-search" class="sr-only">Buscar perfume, marca ou família olfativa</label>
+                <div class="flex items-center gap-3 bg-white border border-nude-300 rounded-full px-5 py-3 shadow-sm focus-within:ring-2 focus-within:ring-sage">
+                    <i class="ph ph-magnifying-glass text-xl text-sage-dark" aria-hidden="true"></i>
+                    <input id="perfume-search" type="search" placeholder="Buscar perfume, marca ou família olfativa..." class="w-full bg-transparent outline-none text-sm text-gray-800 placeholder:text-gray-400">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3 mb-8" role="tablist" aria-label="Categorias de perfumes">
+                <button type="button" class="perfume-tab rounded-full px-6 py-3 text-sm font-semibold transition-colors bg-sage text-white shadow-md" data-category="femininos" role="tab" aria-selected="true">Femininos</button>
+                <button type="button" class="perfume-tab rounded-full px-6 py-3 text-sm font-semibold transition-colors bg-white text-sage-dark hover:bg-nude-200" data-category="masculinos" role="tab" aria-selected="false">Masculinos</button>
+                <button type="button" class="perfume-tab rounded-full px-6 py-3 text-sm font-semibold transition-colors bg-white text-sage-dark hover:bg-nude-200" data-category="arabes" role="tab" aria-selected="false">Árabes</button>
+            </div>
+
+            <p id="perfume-count" class="text-center text-sm text-gray-500 mb-6" aria-live="polite"></p>
+            <div id="perfumes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" aria-live="polite"></div>
+            <div class="mt-10 flex justify-center">
+                <button id="perfumes-toggle" type="button" class="hidden inline-flex items-center gap-2 rounded-full border border-sage px-6 py-3 text-sm font-semibold text-sage-dark transition-colors hover:bg-sage hover:text-white" aria-controls="perfumes-grid" aria-expanded="false">
+                    <span>Ver todos os perfumes</span>
+                    <i class="ph ph-caret-down" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato" class="bg-sage-dark text-nude-100 pt-16 pb-8 border-t-[6px] border-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left mb-12">
+                
+                <!-- Brand -->
+                <div class="flex flex-col items-center md:items-start">
+                    <a href="#inicio" class="inline-flex items-center gap-2 mb-4" aria-label="Essências e Afins - início">
+                        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sage-dark">
+                            <img src="marca-flor.png" alt="" class="h-8 w-9 object-contain">
+                        </span>
+                        <span class="font-playfair text-3xl font-bold text-white">Essências <span class="text-gold italic font-normal">& Afins</span></span>
+                    </a>
+                    <p class="text-nude-200 font-light text-sm max-w-xs">Aromas para perfumar sua casa e cuidar de você, com todo o carinho do trabalho artesanal.</p>
+                </div>
+
+                <!-- Pagamento -->
+                <div class="flex flex-col items-center">
+                    <h4 class="font-playfair text-xl text-gold-light mb-6">Formas de Pagamento</h4>
+                    <div class="flex space-x-6 items-center">
+                        <div class="flex flex-col items-center gap-2">
+                            <i class="ph ph-qr-code text-4xl text-nude-100"></i>
+                            <span class="text-sm font-medium">Pix</span>
+                        </div>
+                        <div class="w-px h-10 bg-sage-light/30"></div>
+                        <div class="flex flex-col items-center gap-2">
+                            <i class="ph ph-credit-card text-4xl text-nude-100"></i>
+                            <span class="text-sm font-medium">Cartão de Crédito</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contato -->
+                <div class="flex flex-col items-center md:items-end">
+                    <h4 class="font-playfair text-xl text-gold-light mb-6">Fale Conosco</h4>
+                    <a href="https://wa.me/5514997204055" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-3 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-colors w-full max-w-[250px] justify-center backdrop-blur-sm border border-white/10">
+                        <i class="ph-fill ph-whatsapp-logo text-3xl text-green-400 group-hover:scale-110 transition-transform"></i>
+                        <div class="text-left">
+                            <span class="block text-xs text-nude-200">Atendimento Via WhatsApp</span>
+                            <span class="block font-semibold text-lg tracking-wider">(14) 99720-4055</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-sage-light/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-nude-200/70">
+                    &copy; <script>document.write(new Date().getFullYear())</script> Essências e Afins. Todos os direitos reservados.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-sm">
+                    <a href="https://www.instagram.com/tatiladurao/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-nude-100 hover:text-gold-light transition-colors" aria-label="Instagram de Tatiladurao">
+                        <i class="ph ph-instagram-logo text-xl" aria-hidden="true"></i>
+                        <span>&lt;/&gt; desenvolvido por @tatiladurao</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Float Botão WhatsApp -->
+    <a href="https://wa.me/5514997204055" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Contato via WhatsApp">
+        <i class="ph-fill ph-whatsapp-logo"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Menu Mobile Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            btn.setAttribute('aria-expanded', String(!menu.classList.contains('hidden')));
+        });
+
+        // Fechar menu ao clicar em um link (mobile)
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Efeito na Navbar ao dar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('shadow-sm');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('shadow-sm');
+            }
+        });
+
+        // 2. Catálogo de perfumes
+        const catalogoPerfumes = {
+            femininos: [
+                '1|212 FEM|Carolina Herrera|Floral Amadeirado',
+                '28|212 Heroes Forever Young|Carolina Herrera|Frutal Amadeirado',
+                '2|212 Sexy Fem|Carolina Herrera|Oriental Floral',
+                '3|212 VIP Fem|Carolina Herrera|Baunilha Oriental',
+                '4|212 VIP Rosé|Carolina Herrera|Floral Frutado',
+                '43|Acqua di Gioia|Giorgio Armani|Floral Aquoso',
+                '53|Addict|Dior|Floral Amadeirado',
+                '55|Alien|Thierry Mugler|Floral Amadeirado',
+                '5|Amarige|Givenchy|Floral',
+                '6|Amor Amor|Cacharel|Floral Frutado',
+                '68|Ange ou Démon|Givenchy|Âmbar Floral',
+                '8|Angel|Thierry Mugler|Oriental Especiado',
+                '77|Armani Code Fem|Giorgio Armani|Floral Adocicado',
+                '52|Black XS Fem|Paco Rabanne|Floral Amadeirado',
+                '37|Bombshell|Victoria’s Secret|Floral Frutado',
+                '56|Born in Roma Coral Fantasy|Valentino|Floral Frutado',
+                '118|Born in Roma EDP|Valentino|Oriental Floral',
+                '110|Burberry Goddess|Burberry|Aromático Gourmand',
+                '7|Burberry Her|Burberry|Oriental Gourmand',
+                '9|Candy|Prada|Aromático',
+                '10|CH Feminino|Carolina Herrera|Oriental Floral',
+                '11|Chance|Chanel|Chipre Floral',
+                '63|Chance Eau de Tendre|Chanel|Floral Frutado',
+                '71|Chance Eau Fraîche|Chanel|Chipre Floral',
+                '119|Chance Splendide|Chanel|Floral Frutado',
+                '12|Chanel Nº 5|Chanel|Floral Aldeídico',
+                '115|Cheirosa 68|Sol de Janeiro|Floral Frutado',
+                '13|Chloé|Chloé|Oriental Floral',
+                '91|CK In2U for Her|Calvin Klein|Âmbar Floral',
+                '83|Coco Mademoiselle|Chanel|Chipre Floral',
+                '42|Coco Mademoiselle L’Eau Privée|Chanel|Oriental Floral',
+                '47|Crystal Noir|Versace|Âmbar Floral',
+                '59|Daisy|Marc Jacobs|Floral Amadeirado',
+                '107|Divine|Jean Paul Gaultier|Oriental Floral',
+                '85|DG Light Blue Fem|Dolce & Gabbana|Floral Frutado',
+                '109|Devotion|Dolce & Gabbana|Gourmand',
+                '15|Dolce & Gabbana Fem|Dolce & Gabbana|Floral Aldeídico',
+                '78|Dylan Blue Fem|Versace|Floral Frutado',
+                '16|Dylan Purple|Versace|Floral Frutado',
+                '98|Dylan Turquoise|Versace|Floral Frutado',
+                '88|Elysée|O Boticário|Chipre Floral',
+                '67|Eternity|Calvin Klein|Floral',
+                '18|Euphoria|Calvin Klein|Oriental Floral',
+                '93|Fame|Paco Rabanne|Floral Amadeirado',
+                '84|Fantasy|Britney Spears|Floral Frutado',
+                '96|Flower by Kenzo|Kenzo|Floral',
+                '75|Flowerbomb|Viktor & Rolf|Âmbar Floral',
+                '22|Gabriela Sabatini|Gabriela Sabatini|Ambarino Floral',
+                '51|Gabrielle|Chanel|Floral',
+                '86|Good Girl|Carolina Herrera|Oriental Floral',
+                '92|Good Girl Blush|Carolina Herrera|Âmbar Floral',
+                '79|Good Girl Légère|Carolina Herrera|Âmbar Floral',
+                '100|Gucci Guilty|Gucci|Oriental Floral',
+                '23|Hypnôse|Lancôme|Baunilha Oriental',
+                '62|Hypnotic Poison|Dior|Oriental',
+                '69|Idôle|Lancôme|Chipre Floral',
+                '24|J’adore|Dior|Floral Frutado',
+                '101|J’adore L’Or|Dior|Floral',
+                '25|Jean Paul Gaultier Classique|Jean Paul Gaultier|Floral Oriental',
+                '35|La Belle|Jean Paul Gaultier|Floral Frutado',
+                '128|La Belle Paradise Garden|Jean Paul Gaultier|Floral',
+                '105|La Bomba|Carolina Herrera|Floral Frutado',
+                '40|La Nuit Trésor|Lancôme|Floral Oriental',
+                '32|La Vie Est Belle|Lancôme|Gourmand Floral',
+                '66|La Vie Est Belle en Rose|Lancôme|Floral Frutado',
+                '123|La Vie Est Belle L’Elixir|Lancôme|Floral Frutado Gourmand',
+                '19|La Vie Est Belle Soleil Cristal|Lancôme|Chipre Floral',
+                '117|La Vie Est Belle Vanille Nude|Lancôme|Oriental Floral',
+                '27|Lady Million|Paco Rabanne|Floral Frutado',
+                '70|L’Eau de Chloé|Chloé|Chipre Floral',
+                '74|L’Eau d’Issey Fem|Issey Miyake|Aquático Floral Fresco',
+                '87|Libre|Yves Saint Laurent|Âmbar Fougère',
+                '76|Libre Flowers & Flames|Yves Saint Laurent|Floral Âmbar',
+                '61|Lily|O Boticário|Floral',
+                '17|Linda|O Boticário|Floral Frutado',
+                '73|L’Interdit|Givenchy|Floral Aldeídico',
+                '48|Mademoiselle|Azzaro|Floral Frutado',
+                '111|Million Gold for Her|Paco Rabanne|Floral Amadeirado',
+                '112|Miracle|Lancôme|Floral Frutado',
+                '58|Miss Dior|Dior|Floral',
+                '29|Miss Dior Chérie|Dior|Chipre Frutado',
+                '122|Mon Guerlain Bloom of Rose|Mon Guerlain|Oriental Floral',
+                '125|My Devotion|Dolce & Gabbana|Floral Frutado',
+                '89|My Way|Giorgio Armani|Floral',
+                '60|Narciso Rodriguez for Her|Narciso Rodriguez|Floral',
+                '30|Nina|Nina Ricci|Floral Frutado',
+                '80|Nomade|Chloé|Chipre Floral',
+                '31|Olympea|Paco Rabanne|Oriental Floral',
+                '124|Olympea Absolu|Paco Rabanne|Oriental Floral',
+                '54|Omnia Amethyst|Bvlgari|Floral',
+                '36|Paris|Yves Saint Laurent|Floral',
+                '49|Poison Girl|Dior|Gourmand Floral',
+                '126|Power of You|Giorgio Armani|Floral Frutado Gourmand',
+                '116|Pure XS for Her|Rabanne|Oriental Floral',
+                '95|Prada Paradoxe|Prada|Âmbar Floral',
+                '14|Tartine et Chocolat|Givenchy|Floral Verde',
+                '82|Rose Goldea|Bvlgari|Floral',
+                '34|Rouge Royal|Marina de Bourbon|Floral Frutado',
+                '57|Samsara|Guerlain|Floral Amadeirado',
+                '90|Scandal|Jean Paul Gaultier|Chipre Floral',
+                '45|Sì|Giorgio Armani|Chipre',
+                '81|Sì Passione|Giorgio Armani|Floral Frutado',
+                '99|Signature|Montblanc|Âmbar Floral',
+                '114|Sol de Janeiro x Anitta|Sol de Janeiro|Floral Frutado',
+                '113|Tiffany for Her|Tiffany & Co.|Floral',
+                '72|The One|Dolce & Gabbana|Oriental Floral',
+                '65|Tommy Girl|Tommy Hilfiger|Floral Frutado',
+                '39|Toy 2 Pearl|Moschino|Floral Frutado',
+                '50|Wanted Girl|Azzaro|Floral Frutado',
+                '33|Woman|Ralph Lauren|Floral'
+            ].map(item => item.split('|')),
+            masculinos: [
+                '81|212 Heroes|Carolina Herrera|Aromático Frutado',
+                '86|212 Men|Carolina Herrera|Floral Amadeirado',
+                '2|212 Sexy Men|Carolina Herrera|Fougère Oriental',
+                '52|212 VIP Black|Carolina Herrera|Fougère Aromático',
+                '3|212 VIP Men|Carolina Herrera|Oriental Amadeirado',
+                '5|Acqua di Giò|Giorgio Armani|Aromático Aquoso',
+                '76|Acqua di Giò Absolu|Giorgio Armani|Amadeirado Aromático',
+                '39|Acqua di Giò Profondo|Giorgio Armani|Aromático Fougère',
+                '59|Allure Homme|Chanel|Aromático Aquoso',
+                '60|Allure Sport|Chanel|Amadeirado Aquoso',
+                '6|Animale for Men|Animale|Oriental Picante',
+                '88|Aqva Men Pour Homme|Bvlgari|Aromático Aquoso',
+                '14|Armani Code|Giorgio Armani|Oriental Picante',
+                '48|Armani Code Profumo|Giorgio Armani|Oriental Ambarado',
+                '92|Armani Pour Homme|Giorgio Armani|Cítrico Aromático',
+                '43|Azzaro Pour Homme|Azzaro|Fougère Aromático',
+                '58|Bad Boss|Exclusivo|Oriental Amadeirado',
+                '66|Bad Boy|Carolina Herrera|Oriental Especiado',
+                '32|Black XS|Rabanne|Oriental Amadeirado',
+                '33|Black XS L’Excès|Rabanne|Amadeirado Aromático',
+                '8|Bleu de Chanel|Chanel|Amadeirado Aromático',
+                '109|Bleu de Chanel EDP|Chanel|Amadeirado Aromático',
+                '9|Boss Bottled|Hugo Boss|Amadeirado Aromático',
+                '10|Bvlgari Black|Bvlgari|Amadeirado Aromático',
+                '11|CH Men|Carolina Herrera|Oriental Picante',
+                '56|CK Be|Calvin Klein|Floral Amadeirado',
+                '82|CK One|Calvin Klein|Aromático Cítrico',
+                '87|DG Light Blue Men|Dolce & Gabbana|Cítrico Amadeirado',
+                '15|Dolce & Gabbana Men|Dolce & Gabbana|Amadeirado Especiado',
+                '4|Dune|Dior|Amadeirado Aquoso',
+                '73|Dylan Blue Men|Versace|Aromático Aquoso',
+                '46|Emblem|Montblanc|Aromático Especiado',
+                '72|Eros|Versace|Amadeirado Especiado',
+                '01|Explorer|Montblanc|Amadeirado',
+                '17|Fahrenheit|Dior|Floral Amadeirado',
+                '83|Ferrari Black|Ferrari|Fougère Aromático',
+                '19|Fierce|Abercrombie|Amadeirado Aromático',
+                '54|Gentleman|Givenchy|Amadeirado Aromático',
+                '84|Hugo Men|Hugo Boss|Herbal Aromático',
+                '20|Invictus|Paco Rabanne|Amadeirado Aquoso',
+                '36|Invictus Aqua|Paco Rabanne|Amadeirado Aquoso',
+                '90|Invictus Platinum|Paco Rabanne|Amadeirado Aromático',
+                '12|Invictus Victory Elixir|Paco Rabanne|Amadeirado',
+                '78|Invictus Victory|Paco Rabanne|Âmbar',
+                '67|Jazz|Yves Saint Laurent|Amadeirado Especiado',
+                '89|Jimmy Choo Men|Jimmy Choo|Oriental Amadeirado',
+                '53|Joop! Homme|Joop!|Floral Amadeirado',
+                '37|Joop! Nightflight|Joop!|Âmbar',
+                '77|K by Dolce & Gabbana|Dolce & Gabbana|Amadeirado Aromático',
+                '34|Kaiak|Natura|Amadeirado',
+                '21|Kouros|Yves Saint Laurent|Chipre Oriental',
+                '51|L’Eau d’Issey Men|Issey Miyake|Amadeirado Aquoso',
+                '65|Lacoste Blanc Men|Lacoste|Amadeirado',
+                '64|Lacoste Junior|Lacoste|Fougère Fresco',
+                '57|Lapidus Men|Ted Lapidus|Oriental Amadeirado',
+                '105|Le Beau Paradise Garden|Jean Paul Gaultier|Amadeirado Aquático',
+                '24|Le Male|Jean Paul Gaultier|Fougère',
+                '93|Le Male Elixir|Jean Paul Gaultier|Oriental Fougère',
+                '104|Le Male Le Parfum|Jean Paul Gaultier|Oriental',
+                '75|Legend|Montblanc|Fougère Aromático',
+                '40|Legend Spirit|Montblanc|Amadeirado Aromático',
+                '85|L’Homme Intense|Prada|Chipre Amadeirado',
+                '42|Luna Rossa|Prada|Aromático Cítrico',
+                '25|Malbec|O Boticário|Amadeirado Frutal',
+                '16|Man in Black|Bvlgari|Oriental Especiado',
+                '49|MYSLF Le Parfum|Yves Saint Laurent|Oriental Amadeirado',
+                '26|One Million|Paco Rabanne|Amadeirado Picante',
+                '101|One Million Elixir|Rabanne|Amadeirado Aromático',
+                '74|One Million Lucky|Paco Rabanne|Amadeirado Frutal',
+                '71|One Million Privé|Paco Rabanne|Oriental Amadeirado',
+                '47|Petits et Mamans|Bvlgari|Floral Amadeirado',
+                '80|Phantom|Paco Rabanne|Amadeirado Gourmand',
+                '62|Pi|Givenchy|Fougère Oriental',
+                '27|Polo|Ralph Lauren|Amadeirado Chipre',
+                '55|Polo Blue|Ralph Lauren|Aquático Aromático',
+                '70|Polo Red|Ralph Lauren|Oriental Amadeirado',
+                '28|Polo Sport|Ralph Lauren|Amadeirado Cítrico',
+                '103|Prada Paradigme|Prada|Oriental Fougère',
+                '29|Sauvage|Dior|Fougère Aromático',
+                '99|Sauvage EDP|Dior|Oriental Fougère',
+                '69|Sauvage Elixir|Dior|Aromático',
+                '79|Scandal Men|Jean Paul Gaultier|Âmbar Amadeirado',
+                '98|Scandal Intense Pour Homme|Jean Paul Gaultier|Amadeirado Aromático',
+                '30|Silver Scent|Jacques Bogart|Fougère Ambarino',
+                '113|Stronger With You|Giorgio Armani|Aromático Fougère',
+                '63|Terre d’Hermès|Hermès|Amadeirado Especiado',
+                '18|Tiffany & Love for Him|Tiffany & Co.|Cítrico Aromático',
+                '91|The Most Wanted|Azzaro|Âmbar Especiado',
+                '31|The One for Men|Dolce & Gabbana|Amadeirado Picante',
+                '38|Tommy Boy|Tommy Hilfiger|Amadeirado',
+                '22|Toy Boy|Moschino|Amadeirado Especiado',
+                '61|Ultra Male|Jean Paul Gaultier|Fougère Oriental',
+                '112|Vetiver Musc for Him|Narciso Rodriguez|Aromático Amadeirado',
+                '50|Versace Eau Fraîche|Versace|Aquático Amadeirado',
+                '13|Versace Men|Versace|Fougère Aromático',
+                '41|Wanted Men|Azzaro|Fougère Aromático',
+                '23|Y|Yves Saint Laurent|Fougère Amadeirado',
+                '102|Y Le Parfum|Yves Saint Laurent|Oriental Fougère',
+                '7|Zaad Men|O Boticário|Amadeirado'
+            ].map(item => item.split('|')),
+            arabes: [
+                '1|Ameerat Al Arab Prive Rose|ASD|Floral Frutado|Delina Exclusif|Feminino',
+                '2|Asad|Lattafa|Amadeirado Especiado|Sauvage Elixir|Masculino',
+                '3|Haya|Lattafa|Floral Frutado|Viva La Juicy|Feminino',
+                '4|Asad Bourbon|Lattafa|Oriental Especiado|Bad Boy Extreme|Masculino',
+                '5|Qasaed Al Sultan|Lattafa|Amadeirado Oriental|Exclusivo|Não informado',
+                '6|Sultan Al Lail|Al Wataniah|Amadeirado Especiado|Exclusivo|Masculino',
+                '7|Fakhar|Lattafa|Aromático Amadeirado|Dior Homme Intense|Masculino',
+                '8|Sabah Al Ward|Al Wataniah|Floral Frutado|Exclusivo|Feminino',
+                '9|Shaheen Silver|Lattafa|Amadeirado Fresco|Exclusivo|Compartilhável',
+                '10|Shaqaf Al Ward|Al Wataniah|Oriental Floral|Exclusivo|Feminino',
+                '11|Al Noble Ameer|Lattafa|Amadeirado Especiado|Swedish Wood|Compartilhável',
+                '12|Atheeri|Lattafa|Oriental Floral|Flora G. Orchid|Feminino',
+                '13|Yara|Lattafa|Gourmand Frutado|Exclusivo|Feminino',
+                '14|Khamrah Qahwa|Lattafa|Gourmand Oriental|Angel’s Share|Feminino',
+                '15|Jasoor|Lattafa|Oriental Amadeirado|Valentino Uomo Coral Fantasy|Compartilhável',
+                '16|Musamam White Intense|Lattafa|Amadeirado Fresco|Exclusivo|Compartilhável',
+                '17|Reyna|Maison Alhambra|Floral Frutado|Burberry Her Elixir|Feminino',
+                '18|Fakhar Rose|Lattafa|Floral Frutado|Idôle Nectar|Feminino',
+                '19|Afeef|Lattafa|Oriental|Exclusivo|Compartilhável',
+                '20|Duha|Al Wataniah|Floral Oriental|Exclusivo|Feminino',
+                '21|Attar Al Wesal|Al Wataniah|Amadeirado Oriental|Exclusivo|Compartilhável',
+                '22|Fakhar Gold Extrait|Lattafa|Oriental Especiado|Bvlgari Man in Black|Compartilhável',
+                '23|Ameerati|Al Wataniah|Aromático Especiado|Exclusivo|Feminino',
+                '24|Yara Tous|Lattafa|Floral Frutado|Exclusivo|Feminino',
+                '25|Sceptre Bronze|Maison Alhambra|Amadeirado Oriental|Tygar Bvlgari|Masculino',
+                '26|Durrat Al Aroos|Al Wataniah|Floral Oriental|Exclusivo|Compartilhável',
+                '27|Bade’e Al Oud of Glory|Lattafa|Oriental Amadeirado|Oud for Greatness|Compartilhável',
+                '28|Club de Nuit Intense|Armaf|Amadeirado Especiado|Creed|Masculino',
+                '29|Amber Rouge|Orientica|Oriental Ambarado|Baccarat Rouge 540|Compartilhável',
+                '30|Club de Nuit Woman|Armaf|Floral Frutado|Coco Mademoiselle|Feminino',
+                '31|Club de Nuit Man|Armaf|Amadeirado Especiado|Creed Aventus|Masculino',
+                '32|Royal Amber|Orientica|Oriental Baunilha|Exclusivo|Compartilhável',
+                '33|Infini Oud|Maison Alhambra|Oriental Amadeirado|Exclusivo|Masculino'
+            ].map(item => item.split('|'))
+        };
+
+        const perfumeTabs = document.querySelectorAll('.perfume-tab');
+        const perfumesGrid = document.getElementById('perfumes-grid');
+        const perfumeSearch = document.getElementById('perfume-search');
+        const perfumeCount = document.getElementById('perfume-count');
+        const perfumesToggle = document.getElementById('perfumes-toggle');
+        const limitePerfumesVisiveis = 12;
+        let categoriaPerfumeAtual = 'femininos';
+        let perfumesExpandidos = false;
+
+        const normalizarTexto = texto => texto
+            .toLocaleLowerCase('pt-BR')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+
+        const renderizarPerfumes = () => {
+            const busca = normalizarTexto(perfumeSearch.value.trim());
+            const perfumes = catalogoPerfumes[categoriaPerfumeAtual]
+                .map(([referencia, nome, marca, familia, inspiracao, genero]) => ({
+                    referencia, nome, marca, familia, inspiracao, genero
+                }))
+                .filter(perfume => normalizarTexto(Object.values(perfume).filter(Boolean).join(' ')).includes(busca));
+
+            perfumesGrid.replaceChildren();
+            perfumeCount.textContent = `${perfumes.length} ${perfumes.length === 1 ? 'fragrância encontrada' : 'fragrâncias encontradas'}`;
+            const mostrarControle = perfumes.length > limitePerfumesVisiveis;
+            perfumesToggle.classList.toggle('hidden', !mostrarControle);
+            perfumesToggle.setAttribute('aria-expanded', String(perfumesExpandidos && mostrarControle));
+            perfumesToggle.querySelector('span').textContent = perfumesExpandidos
+                ? 'Mostrar menos'
+                : `Ver todos os ${perfumes.length} perfumes`;
+            perfumesToggle.querySelector('i').className = perfumesExpandidos
+                ? 'ph ph-caret-up'
+                : 'ph ph-caret-down';
+
+            if (perfumes.length === 0) {
+                const vazio = document.createElement('p');
+                vazio.className = 'col-span-full text-center text-gray-500 py-12';
+                vazio.textContent = 'Nenhum perfume encontrado. Tente buscar por outro nome ou marca.';
+                perfumesGrid.append(vazio);
+                return;
+            }
+
+            const perfumesExibidos = perfumesExpandidos
+                ? perfumes
+                : perfumes.slice(0, limitePerfumesVisiveis);
+
+            perfumesExibidos.forEach(perfume => {
+                const card = document.createElement('article');
+                card.className = 'bg-white rounded-2xl p-5 border border-nude-200 shadow-sm card-hover';
+
+                const referencia = document.createElement('span');
+                referencia.className = 'inline-flex items-center justify-center min-w-9 h-9 px-2 rounded-full bg-nude-200 text-sage-dark text-xs font-semibold mb-3';
+                referencia.textContent = perfume.referencia;
+                card.append(referencia);
+
+                const nome = document.createElement('h3');
+                nome.className = 'font-playfair text-lg text-sage-dark font-semibold leading-snug mb-2';
+                nome.textContent = perfume.nome;
+                card.append(nome);
+
+                const marca = document.createElement('p');
+                marca.className = 'text-sm text-gray-700 mb-1';
+                marca.textContent = perfume.marca;
+                card.append(marca);
+
+                const familia = document.createElement('p');
+                familia.className = 'text-xs text-gray-500';
+                familia.textContent = perfume.familia;
+                card.append(familia);
+
+                if (perfume.inspiracao) {
+                    const inspiracao = document.createElement('p');
+                    inspiracao.className = 'text-xs text-gold-dark mt-3 pt-3 border-t border-nude-200';
+                    inspiracao.textContent = `Inspiração: ${perfume.inspiracao}`;
+                    card.append(inspiracao);
+                }
+
+                if (perfume.genero) {
+                    const genero = document.createElement('span');
+                    genero.className = 'inline-block mt-2 text-[10px] uppercase tracking-wider text-gray-400';
+                    genero.textContent = perfume.genero;
+                    card.append(genero);
+                }
+
+                perfumesGrid.append(card);
+            });
+        };
+
+        perfumeTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                categoriaPerfumeAtual = tab.dataset.category;
+                perfumesExpandidos = false;
+                perfumeTabs.forEach(item => {
+                    const selecionada = item === tab;
+                    item.setAttribute('aria-selected', String(selecionada));
+                    item.classList.toggle('bg-sage', selecionada);
+                    item.classList.toggle('text-white', selecionada);
+                    item.classList.toggle('shadow-md', selecionada);
+                    item.classList.toggle('bg-white', !selecionada);
+                    item.classList.toggle('text-sage-dark', !selecionada);
+                });
+                renderizarPerfumes();
+            });
+        });
+
+        perfumeSearch.addEventListener('input', () => {
+            perfumesExpandidos = false;
+            renderizarPerfumes();
+        });
+        perfumesToggle.addEventListener('click', () => {
+            perfumesExpandidos = !perfumesExpandidos;
+            renderizarPerfumes();
+        });
+        renderizarPerfumes();
+
+    </script>
+</body>
+</html>
